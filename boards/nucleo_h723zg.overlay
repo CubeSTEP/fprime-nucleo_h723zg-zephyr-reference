@@ -3,3 +3,13 @@
         compatible = "zephyr,cdc-acm-uart";
     };
 };
+
+&i2c1 {
+    status = "okay";
+
+    mpu6050@68 {
+        compatible = "invensense,mpu6050";
+        reg = <0x68>;
+        label = "MPU6050";
+    };
+};
