@@ -53,6 +53,7 @@ module ReferenceDeployment {
     instance systemResources #
     instance led
     instance gpioDriver
+    instance i2cDriver
 
     # ----------------------------------------------------------------------
     # Pattern graph specifiers

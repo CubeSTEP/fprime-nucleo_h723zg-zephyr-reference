@@ -237,10 +237,13 @@
 #include <Fw/Logger/Logger.hpp>
 
 #include <zephyr/drivers/gpio.h>
+#include <zephyr/drivers/i2c.h>
 
 #define LED0_NODE DT_ALIAS(led0)
+#define MPU6050_NODE DT_NODELABEL(mpu6050)
 
 static const struct gpio_dt_spec led = GPIO_DT_SPEC_GET(LED0_NODE, gpios);
+static const struct i2c_dt_spec mpu6050 = I2C_DT_SPEC_GET(MPU6050_NODE);
 
 // Allows easy reference to objects in FPP/autocoder required namespaces
 using namespace ReferenceDeployment;
@@ -344,6 +347,10 @@ void configureTopology(const TopologyState& state) {
         Fw::Logger::log("[ERROR] Failed to open GPIO pin\n");
     }
 
+    status = i2cDriver.open(mpu6050);
+    if (status != Os::File::Status::OP_OK) {
+        Fw::Logger::log("[ERROR] Failed to open I2C connection\n");
+    }
 }
 
 // Public functions for use in main program are namespaced with deployment name ReferenceDeployment
