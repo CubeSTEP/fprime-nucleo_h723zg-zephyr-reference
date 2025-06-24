@@ -5,7 +5,31 @@ module Components {
         # One async command/port is required for active components
         # This should be overridden by the developers with a useful command/port
         @ TODO
-        async command TODO opcode 0
+        async command MPU6050_ON_OFF(
+            onOff: Fw.On @< Indicates whether the monitor should be on or off
+        )
+
+        event SetMonitorState($state: Fw.On) \
+            severity activity high \
+            format "Set MPU6050 monitor to {}."
+
+        event DataRateSet(interval: U32) \
+            severity activity high \
+            format "MPU6050 data rate set to {}."
+
+        event MonitorState(onOff: Fw.On) \
+            severity activity low \
+            format "MPU6050 is {}."
+
+
+        @ Data rate interval in rate group ticks
+        param DATA_RATE: U32 default 1
+
+        @ Port for receiving calls from the rate group ticks
+        async input port run: Svc.Sched
+
+        @ Port sending calls to the I2C driver
+        output port i2cWriteRead: Drv.I2cWriteRead
 
         ##############################################################################
         #### Uncomment the following examples to start customizing your component ####

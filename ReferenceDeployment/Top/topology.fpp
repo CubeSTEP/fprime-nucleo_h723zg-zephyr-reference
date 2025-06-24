@@ -54,6 +54,7 @@ module ReferenceDeployment {
     instance led
     instance gpioDriver
     instance i2cDriver
+    instance mpuMonitor
 
     # ----------------------------------------------------------------------
     # Pattern graph specifiers
@@ -188,6 +189,13 @@ module ReferenceDeployment {
       rateGroup1.RateGroupMemberOut[1] -> led.run
       # led's gpioSet output is connected to gpioDriver's gpioWrite input
       led.gpioSet -> gpioDriver.gpioWrite
+    }
+
+    connections MPU6050Connections {
+      # Rate Group 1 (1Hz cycle) ouput is connected to led's run input
+      rateGroup1.RateGroupMemberOut[4] -> mpuMonitor.run
+      # led's gpioSet output is connected to gpioDriver's gpioWrite input
+      mpuMonitor.i2cWriteRead -> i2cDriver.writeRead
     }
 
   }

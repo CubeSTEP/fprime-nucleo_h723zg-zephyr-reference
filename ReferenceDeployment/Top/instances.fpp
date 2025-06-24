@@ -92,6 +92,11 @@ module ReferenceDeployment {
     stack size Default.STACK_SIZE \
     priority 4
 
+  instance mpuMonitor: Components.MPU6050Monitor base id 0x0F00 \
+    queue size Default.QUEUE_SIZE \
+    stack size Default.STACK_SIZE \
+    priority 3
+
   # ----------------------------------------------------------------------
   # Queued component instances
   # ----------------------------------------------------------------------
