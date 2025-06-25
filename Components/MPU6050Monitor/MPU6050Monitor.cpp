@@ -64,12 +64,11 @@ namespace Components {
               // this->tlmWrite_ACCEL_Y(accel_y);
               // this->tlmWrite_ACCEL_Z(accel_z);
               Fw::Logger::log("Acceleration X: %u\n", accel_x);
-              Fw::Logger::log("Acceleration X: %u\n", accel_y);
-              Fw::Logger::log("Acceleration X: %u\n", accel_z);
+              Fw::Logger::log("Acceleration Y: %u\n", accel_y);
+              Fw::Logger::log("Acceleration Z: %u\n", accel_z);
           } else {
               // this->log_WARNING_HI_MPU6050_I2C_ERROR(status);
               Fw::Logger::log("Error polling MPU6050. Status: %u\n", status);
-
           }
       }
     }
